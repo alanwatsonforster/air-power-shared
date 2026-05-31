@@ -34,7 +34,56 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Abbreviations
+% TEXT LAYOUT
+
+\usepackage{multicol}
+
+\setlength{\multicolsep}{0ex}
+\setlength{\columnsep}{1.5em}
+\setlength{\columnseprule}{0pt}
+
+\setlength{\parindent}{1.0em}
+\setlength{\parskip}{0ex}
+\newcommand{\numberspace}{\phantom{0}}
+
+% Two-column text really needs relaxed line breaking.
+
+\sloppy
+
+% Use slightly less tight line spacing by default.
+
+\usepackage{setspace}
+\setstretch{1.05}
+
+% Line weights. I'm not sure why this is set as we use booktabs.
+
+\setlength{\arrayrulewidth}{0.4pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% HEADERS
+
+\usepackage{fancyhdr}
+
+\newcommand{\therunningtitle}{}
+\newcommand{\runningtitle}[1]{\renewcommand{\therunningtitle}{#1}}
+
+\pagestyle{fancy}
+\setlength{\headsep}{0.6em}
+\fancyhead[L]{\textbf{\therunningtitle}}
+\fancyhead[C]{}
+\fancyhead[R]{\textbf{Page \thepage}}
+\fancyfoot[L,C,R]{}
+\setlength{\footskip}{4pt}
+\renewcommand{\headruleskip}{0.1em}
+% Set \headrulewidth to match \heavyrulewidth in booktabs.
+\renewcommand{\headrulewidth}{0.08em}
+\addtolength{\headheight}{\headruleskip}
+\addtolength{\headheight}{\headrulewidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ABBREVIATIONS
 
 \newcommand{\AirSup}{\textit{Air Superiority}}
 \newcommand{\AirStr}{\textit{Air Strike}}
@@ -63,11 +112,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Special characters
+% MATHEMATICS AND ANGLES
 
-\renewcommand{\deg}{\ensuremath{^\circ}}
+% Plex does not currently (early 2026) seem to be completely integrated into
+% math mode.
 
-% These are the corresponding Unicode characters.
+% Math characters. These are the corresponding Unicode characters.
+
 \newcommand{\textplus}{+}
 \renewcommand{\textminus}{−}
 \newcommand{\textdegrees}{°}
@@ -77,6 +128,8 @@
 \newcommand{\textlessthanorequal}{≤}
 \newcommand{\textgreaterthanorequal}{≥}
 \newcommand{\textinfinity}{∞}
+
+% Arithmetic expressions.
 
 \newcommand{\plus}[1]{\textplus#1}
 \newcommand{\plusafter}[1]{#1\textplus}
@@ -106,7 +159,10 @@
 \newcommand{\triperelation}[5]{#1~#2~#3~#4~#5}
 \newcommand{\tighttriperelation}[5]{\mbox{#1#2#3#4#5}}
 
+% Angles and arcs.
+
 \newcommand{\degrees}[1]{#1\textdegrees}
+\renewcommand{\deg}{\ensuremath{^\circ}}
 
 \newcommand{\arc}[1]{\degrees{#1}}
 \newcommand{\arcline}[1]{\degrees{#1}}
