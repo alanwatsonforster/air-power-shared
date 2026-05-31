@@ -31,7 +31,6 @@
 % Improved spacing and breaking.
 \usepackage{microtype}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % TEXT LAYOUT
@@ -76,6 +75,28 @@
 \renewcommand{\headrulewidth}{0.08em}
 \addtolength{\headheight}{\headruleskip}
 \addtolength{\headheight}{\headrulewidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TITLE PAGE
+
+\let\originaltitle\title
+\renewcommand{\title}[1]{\originaltitle{\bfseries\huge{#1}}}
+\let\originalauthor\author
+\renewcommand{\author}[1]{\originalauthor{\parbox{0.5\linewidth}{\centering\large #1}}}
+\let\originaldate\date
+\renewcommand{\date}[1]{\originaldate{\large #1}}
+
+\newcommand{\maketitlepage}[4]{%
+    \twocolumn[
+        \title{Air Power\\[1ex] #1}
+        \author{#2}
+        \date{#3\\[2\bigskipamount]#4}
+        \maketitle
+    ]
+    \thispagestyle{empty}
+    \clearpage
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
