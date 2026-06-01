@@ -80,7 +80,7 @@
 
 % LINKS
 
-\usepackage{hyperref}
+\usepackage[bookmarks,bookmarksdepth=2,hypertexnames=false]{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -272,6 +272,50 @@
     \let\clearpage\saved@clearpage
     \let\textwidth\saved@textwidth
     \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% END NOTES
+
+\usepackage{enotez}
+
+\makeatletter
+
+\newcommand{\setlistofnoteheading}[1]{%
+    \let\@listofnotesheading#1
+}
+\setlistofnoteheading{\chapter}
+
+\setenotez{%
+    list-heading={\@listofnotesheading{#1}},
+    reset = true,
+    backref = true
+}
+
+\newcommand{\note}[2]{%
+    \endnote{%
+        \setlength{\parindent}{0pt}%
+        \setlength{\parskip}{\smallskipamount}%
+        {\bfseries #1}\par\nopagebreak #2
+    }%
+}
+
+\newcommand{\noteparagraph}[1]{%
+    \par{\itshape #1:} \ignorespaces%
+}
+
+\newenvironment{notesources}{%
+    \noteparagraph{Sources}
+    \begin{itemize}\raggedright
+        }{
+    \end{itemize}
+}
+
+\newcommand{\listofnotes}{
+    \printendnotes[itemize]
 }
 
 \makeatother
