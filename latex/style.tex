@@ -2,6 +2,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% INFRASTRUCTURE
+
+\usepackage{graphicx}
+\usepackage{calc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % PAGE
 
 \usepackage[
@@ -359,20 +366,41 @@
 
 % ALIGNMENT AND SPACING
 
-\newlength{\wboxwidth}
+\makeatletter
+
+% The \wbox command puts its second argument in a box equal in width to its
+% first argument. The alignment of the contents of the box can be specified by
+% an optional argument and defaults to r.
+
+\newlength{\@wboxwidth}
 \newcommand{\wbox}[3][r]{%
-    \settowidth{\wboxwidth}{#2}%
-    \makebox[\wboxwidth][#1]{#3}%
+    \settowidth{\@wboxwidth}{#2}%
+    \makebox[\@wboxwidth][#1]{#3}%
 }
 
-\newsavebox{\fitwidthbox}
+% The \fitmaxwidthbox command puts its second argument whose width is the
+% smaller of the natural width of the second argument or the length specified by
+% the first argument. The alignment of the contents of the box is r.
+
+\newlength{\@fitmaxwidthboxlength}
+\newcommand\fitmaxwidthbox[2]{%
+    \settowidth{\@fitmaxwidthboxlength}{#2}%
+    \resizebox{\minof{\@fitmaxwidthboxlength}{#1}}{!}{#2}%
+}
+
+% The fitwidth environment puts its content in a box whose width is the first
+% argument. The alignment of the contents of the box is r.
+
+\newsavebox{\@fitwidthbox}
 \newenvironment{fitwidth}[1]{%
-    \def\fitwidth{#1}%
-    \begin{lrbox}{\fitwidthbox}%
+    \def\@fitwidth{#1}%
+    \begin{lrbox}{\@fitwidthbox}%
     }{%
     \end{lrbox}%
-    \resizebox{\fitwidth}{!}{\usebox{\fitwidthbox}}%
+    \resizebox{\@fitwidth}{!}{\usebox{\@fitwidthbox}}%
 }
+
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
