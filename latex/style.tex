@@ -383,7 +383,7 @@
 % the first argument. The alignment of the contents of the box is r.
 
 \newlength{\@fitmaxwidthboxlength}
-\newcommand\fitmaxwidthbox[2]{%
+\newcommand{\fitmaxwidthbox}[2]{%
     \settowidth{\@fitmaxwidthboxlength}{#2}%
     \resizebox{\minof{\@fitmaxwidthboxlength}{#1}}{!}{#2}%
 }
@@ -505,6 +505,12 @@
 \newcommand{\arcplus}[1]{\plusafter{\degrees{#1}}}
 \newcommand{\arcminus}[1]{\minusafter{\degrees{#1}}}
 \newcommand{\arcborder}[2]{\degrees{#1}/\degrees{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% FLOATS
+
+\usepackage[font=bf]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
