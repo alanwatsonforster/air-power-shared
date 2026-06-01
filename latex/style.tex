@@ -538,6 +538,7 @@
 \usepackage{pdflscape}
 \usepackage{longtable}
 
+\setlength{\extrarowheight}{2pt}
 \setlength{\arrayrulewidth}{0.4pt}
 \setlength{\tabcolsep}{0.3em}
 
@@ -548,12 +549,6 @@
 \end{tabular}}
 
 \newcommand*\vertical{\rotatebox{90}}
-
-\newlength\samewidthlength
-\newcommand\samewidth[3][c]{%
-    \settowidth{\samewidthlength}{#2}%
-    \makebox[\samewidthlength][#1]{#3}%
-}
 
 % New tabularx columns
 
