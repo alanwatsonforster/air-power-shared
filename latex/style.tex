@@ -389,7 +389,7 @@
 }
 
 % The fitwidth environment puts its content in a box whose width is the first
-% argument. The alignment of the contents of the box is r.
+% argument.
 
 \newsavebox{\@fitwidthbox}
 \newenvironment{fitwidth}[1]{%
@@ -398,6 +398,18 @@
     }{%
     \end{lrbox}%
     \resizebox{\@fitwidth}{!}{\usebox{\@fitwidthbox}}%
+}
+
+% The fitwidth environment puts its content in a box whose height is the first
+% argument.
+
+\newsavebox{\@fitheightbox}
+\newenvironment{fitheight}[1]{%
+    \def\@fitheight{#1}%
+    \begin{lrbox}{\@fitheightbox}%
+}{%
+    \end{lrbox}%
+    \resizebox{!}{\@fitheight}{\usebox{\@fitheightbox}}%
 }
 
 \makeatother
