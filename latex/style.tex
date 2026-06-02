@@ -299,6 +299,12 @@
 % clearpage, and as wide as \linewidth (so that it works when set in two
 % columns).
 
+% The multicols package can correctly set the TOC in a single column, but it
+% comes with severe restrictions on the use of floats.
+
+% This implementation has a bug: text after the TOC is set to half the width of
+% a column. This can be fixed by use of \twocolumn again.
+
 \makeatletter
 
 \let\original@tableofcontents\tableofcontents
