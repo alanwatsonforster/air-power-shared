@@ -275,42 +275,53 @@
 \renewcommand{\cftsecfont}{\normalfont\footnotesize}
 \renewcommand{\cftsubsecfont}{\normalfont\footnotesize}
 \renewcommand{\cfttabfont}{\normalfont\footnotesize}
+\renewcommand{\cftfigfont}{\normalfont\footnotesize}
 
 \renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftchapdotsep}}
 \renewcommand{\cftsecleader}{\normalfont\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsubsecleader}{\normalfont\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cfttableader}{\normalfont\cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftfigleader}{\normalfont\cftdotfill{\cftsecdotsep}}
 
 \renewcommand{\cftchappagefont}{\normalfont}
 \renewcommand{\cftsecpagefont}{\normalfont}
 \renewcommand{\cftsubsecpagefont}{\normalfont}
 \renewcommand{\cfttabpagefont}{\normalfont}
+\renewcommand{\cftfigpagefont}{\normalfont}
 
-% Use leaders for chapters, sections, subsections, and tables.
+% Use leaders for chapters, sections, subsections, tables, and figures.
 
 \renewcommand{\cftchapdotsep}{\cftdotsep}
 \renewcommand{\cftsecdotsep}{\cftdotsep}
 \renewcommand{\cftsubsecdotsep}{\cftdotsep}
 \renewcommand{\cfttabdotsep}{\cftdotsep}
+\renewcommand{\cftfigdotsep}{\cftdotsep}
 
-% Dont indent tables.
+% Don't indent tables or figures.
 
 \renewcommand{\cfttabindent}{0pt}
+\renewcommand{\cftfigindent}{0pt}
 
 % Reduce the spacing between dots in the leaders.
 
 \renewcommand{\cftdotsep}{1}
 
-% By default, in the report style the TOC is set as a chapter, with a clearpage,
-% and as wide as \textwidth. I want it to be set as a section, without the
-% clearpage, and as wide as \linewidth (so that it works when set in two
-% columns).
+% Shorter titles for the LOT and LOF.
 
-% The multicols package can correctly set the TOC in a single column, but it
-% comes with severe restrictions on the use of floats.
+\renewcommand{\listtablename}{Tables}
+\renewcommand{\listfigurename}{Figures}
 
-% This implementation has a bug: text after the TOC is set to half the width of
-% a column. This can be fixed by use of \twocolumn again.
+% By default, in the report style the TOC/LOF/LOT is set as a chapter, with a
+% clearpage, and as wide as \textwidth. I want it to be set as a section,
+% without the clearpage, and as wide as \linewidth (so that it works when set in
+% two columns).
+
+% The multicols package can correctly set the TOC/LOF/LOT in a single column,
+% but it comes with severe restrictions on the use of floats.
+
+% This code explicitly saves and restores \textwidth, \columnwidth, and
+% \linewidth, sets \textwidth to \columnwidth so that the TOC/LOF/LOT is set as
+% a single column, disables the \clearpage, and sets the title as a \section.
 
 \makeatletter
 
@@ -319,45 +330,83 @@
 \newlength{\saved@linewidth}
 
 \let\original@tableofcontents\tableofcontents
-\renewcommand{\tableofcontents}{
+\renewcommand{\tableofcontents}{%
+    %
+    % Save settings.
+    %
     \setlength{\saved@textwidth}{\textwidth}
     \setlength{\saved@columnwidth}{\columnwidth}
     \setlength{\saved@linewidth}{\linewidth}
-    \setlength{\textwidth}{\linewidth}
-    %
     \let\saved@clearpage\clearpage
     \@ifundefined{chapter}{}{\let\saved@chapter\chapter}
+    %
+    % Set the TOC in one colum, with no page break, and as a section.
+    %
+    \setlength{\textwidth}{\linewidth}
     \let\clearpage\relax
     \@ifundefined{chapter}{}{\let\chapter\section}
     \original@tableofcontents
-    \let\clearpage\saved@clearpage
-    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    %
+    % Restore settings.
     %
     \setlength{\textwidth}{\saved@textwidth}
     \setlength{\columnwidth}{\saved@columnwidth}
     \setlength{\linewidth}{\saved@linewidth}
+    \let\clearpage\saved@clearpage
+    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    %
 }
-
-\renewcommand{\listtablename}{Tables}
 
 \let\original@listoftables\listoftables
 \renewcommand{\listoftables}{
+    %
+    % Save settings.
+    %
     \setlength{\saved@textwidth}{\textwidth}
     \setlength{\saved@columnwidth}{\columnwidth}
     \setlength{\saved@linewidth}{\linewidth}
-    \setlength{\textwidth}{\linewidth}
-    %
     \let\saved@clearpage\clearpage
     \@ifundefined{chapter}{}{\let\saved@chapter\chapter}
+    %
+    % Set the LOT in one colum, with no page break, and as a section.
+    %
+    \setlength{\textwidth}{\linewidth}
     \let\clearpage\relax
     \@ifundefined{chapter}{}{\let\chapter\section}
     \original@listoftables
+    %
     \let\clearpage\saved@clearpage
     \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
-    %
     \setlength{\textwidth}{\saved@textwidth}
     \setlength{\columnwidth}{\saved@columnwidth}
     \setlength{\linewidth}{\saved@linewidth}
+    %
+}
+
+\let\original@listoffigures\listoffigures
+\renewcommand{\listoffigures}{
+    %
+    % Save settings.
+    %
+    \setlength{\saved@textwidth}{\textwidth}
+    \setlength{\saved@columnwidth}{\columnwidth}
+    \setlength{\saved@linewidth}{\linewidth}
+    \let\saved@clearpage\clearpage
+    \@ifundefined{chapter}{}{\let\saved@chapter\chapter}
+    %
+    % Set the LOF in one colum, with no page break, and as a section.
+    %
+    \setlength{\textwidth}{\linewidth}
+    \let\clearpage\relax
+    \@ifundefined{chapter}{}{\let\chapter\section}
+    \original@listoffigures
+    %
+    \let\clearpage\saved@clearpage
+    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    \setlength{\textwidth}{\saved@textwidth}
+    \setlength{\columnwidth}{\saved@columnwidth}
+    \setlength{\linewidth}{\saved@linewidth}
+    %
 }
 
 \makeatother
