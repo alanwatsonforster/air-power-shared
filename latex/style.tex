@@ -270,25 +270,29 @@
 \setlength{\cftbeforesecskip}{0em}
 
 % Typeset the titles, leaders, and page number in normalfont. Use \small for
-% chapters and \footnotesize for sections and subsection.
+% chapters and \footnotesize for sections, subsection, and tables.
 
 \renewcommand{\cftchapfont}{\normalfont\small}
 \renewcommand{\cftsecfont}{\normalfont\footnotesize}
 \renewcommand{\cftsubsecfont}{\normalfont\footnotesize}
+\renewcommand{\cfttabfont}{\normalfont\footnotesize}
 
 \renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftchapdotsep}}
 \renewcommand{\cftsecleader}{\normalfont\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsubsecleader}{\normalfont\cftdotfill{\cftsecdotsep}}
+\renewcommand{\cfttableader}{\normalfont\cftdotfill{\cftsecdotsep}}
 
 \renewcommand{\cftchappagefont}{\normalfont}
 \renewcommand{\cftsecpagefont}{\normalfont}
 \renewcommand{\cftsubsecpagefont}{\normalfont}
+\renewcommand{\cfttabpagefont}{\normalfont}
 
-% Use leaders for chapters, sections, and subsection.
+% Use leaders for chapters, sections, subsections, and tables.
 
 \renewcommand{\cftchapdotsep}{\cftdotsep}
 \renewcommand{\cftsecdotsep}{\cftdotsep}
 \renewcommand{\cftsubsecdotsep}{\cftdotsep}
+\renewcommand{\cfttabdotsep}{\cftdotsep}
 
 % Reduce the spacing between dots in the leaders.
 
@@ -307,22 +311,50 @@
 
 \makeatletter
 
+\newlength{\saved@textwidth}
+\newlength{\saved@columnwidth}
+\newlength{\saved@linewidth}
+
 \let\original@tableofcontents\tableofcontents
 \renewcommand{\tableofcontents}{
+    \setlength{\saved@textwidth}{\textwidth}
+    \setlength{\saved@columnwidth}{\columnwidth}
+    \setlength{\saved@linewidth}{\linewidth}
+    \setlength{\textwidth}{\linewidth}
     %
     \let\saved@clearpage\clearpage
-    \let\saved@textwidth\textwidth
     \@ifundefined{chapter}{}{\let\saved@chapter\chapter}
-    %
     \let\clearpage\relax
-    \let\textwidth\linewidth
     \@ifundefined{chapter}{}{\let\chapter\section}
-    %
     \original@tableofcontents
-    %
     \let\clearpage\saved@clearpage
-    \let\textwidth\saved@textwidth
     \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    %
+    \setlength{\textwidth}{\saved@textwidth}
+    \setlength{\columnwidth}{\saved@columnwidth}
+    \setlength{\linewidth}{\saved@linewidth}
+}
+
+\renewcommand{\listtablename}{Tables}
+
+\let\original@listoftables\listoftables
+\renewcommand{\listoftables}{
+    \setlength{\saved@textwidth}{\textwidth}
+    \setlength{\saved@columnwidth}{\columnwidth}
+    \setlength{\saved@linewidth}{\linewidth}
+    \setlength{\textwidth}{\linewidth}
+    %
+    \let\saved@clearpage\clearpage
+    \@ifundefined{chapter}{}{\let\saved@chapter\chapter}
+    \let\clearpage\relax
+    \@ifundefined{chapter}{}{\let\chapter\section}
+    \original@listoftables
+    \let\clearpage\saved@clearpage
+    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    %
+    \setlength{\textwidth}{\saved@textwidth}
+    \setlength{\columnwidth}{\saved@columnwidth}
+    \setlength{\linewidth}{\saved@linewidth}
 }
 
 \makeatother
@@ -582,6 +614,22 @@
 
 \newcommand{\tablenotemark}[1]{\mbox{$^{#1}$}}
 \newcommand{\tablenotetext}[2]{\tablenotemark{#1}~#2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TABLE CAPTIONS
+
+\newcommand{\tablecaption}[2]{%
+    \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}}\rule{0em}{3.2ex}}
+    \addcontentsline{lot}{table}{\MakeUppercase{#2}}
+}
+\newcommand{\longtablefirstcaption}[2]{%
+    \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}\rule{0em}{3.2ex}}}
+    \addcontentsline{lot}{table}{\MakeUppercase{#2}}
+}
+\newcommand{\longtablecaption}[1]{%
+    \caption*{\bfseries\MakeUppercase{#1}\rule{0em}{3.2ex}}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
