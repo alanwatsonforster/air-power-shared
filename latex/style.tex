@@ -269,10 +269,9 @@
 \setlength{\cftbeforechapskip}{0em}
 \setlength{\cftbeforesecskip}{0em}
 
-% Typeset the titles, leaders, and page number in normalfont. Use \small for
-% chapters and \footnotesize for sections, subsection, and tables.
+% Typeset the titles, leaders, and page number in \normalfont and \footnotesize.
 
-\renewcommand{\cftchapfont}{\normalfont\small}
+\renewcommand{\cftchapfont}{\normalfont\footnotesize}
 \renewcommand{\cftsecfont}{\normalfont\footnotesize}
 \renewcommand{\cftsubsecfont}{\normalfont\footnotesize}
 \renewcommand{\cfttabfont}{\normalfont\footnotesize}
@@ -293,6 +292,10 @@
 \renewcommand{\cftsecdotsep}{\cftdotsep}
 \renewcommand{\cftsubsecdotsep}{\cftdotsep}
 \renewcommand{\cfttabdotsep}{\cftdotsep}
+
+% Dont indent tables.
+
+\renewcommand{\cfttabindent}{0pt}
 
 % Reduce the spacing between dots in the leaders.
 
