@@ -42,6 +42,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% COLOR
+
+\usepackage{xcolor}
+\newcommand{\highlight}[1]{\color{red}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % TEXT LAYOUT
 
 \usepackage{multicol}
@@ -673,10 +680,12 @@
 
 \newcommand{\tablecaption}[2]{%
     \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}}\rule{0em}{3.2ex}}
+    \ref{#1}
     \addcontentsline{lot}{table}{\MakeUppercase{#2}}
 }
 \newcommand{\longtablefirstcaption}[2]{%
     \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}\rule{0em}{3.2ex}}}
+    \ref{#1}
     \addcontentsline{lot}{table}{\MakeUppercase{#2}}
 }
 \newcommand{\longtablecaption}[1]{%
