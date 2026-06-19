@@ -690,12 +690,12 @@
 
 \newcommand{\tablecaption}[2]{%
     \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}}\rule{0em}{3.2ex}}
-    \ref{#1}
+    \label{#1}
     \addcontentsline{lot}{table}{\MakeUppercase{#2}}
 }
 \newcommand{\longtablefirstcaption}[2]{%
     \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}\rule{0em}{3.2ex}}}
-    \ref{#1}
+    \label{#1}
     \addcontentsline{lot}{table}{\MakeUppercase{#2}}
 }
 \newcommand{\longtablecaption}[1]{%
