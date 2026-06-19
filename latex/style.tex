@@ -197,6 +197,16 @@
     \fontdimen2\font plus \fontdimen3\font minus \fontdimen4\font
 }
 
+% We need an unindented subsection for counters.
+
+\newcommand{\@unindentedsubsection}{%
+    \@startsection{subsection}{2}%
+    {0pt}%
+    {0pt}%
+    {-\interwordspace}%
+    {\normalfont\normalsize\bfseries\@addcolon}%
+}
+
 % Paragraph headings are run-in, indented, normalsize, italic, with a trailing
 % colon.
 
