@@ -10,6 +10,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% LANGUAGES
+
+\usepackage[english,provide=*]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % PAGE
 
 \usepackage[
@@ -51,9 +57,9 @@
 
 % TEXT LAYOUT
 
-\usepackage{multicol}
+%\usepackage{multicol}
 
-\setlength{\multicolsep}{0ex}
+%\setlength{\multicolsep}{0ex}
 \setlength{\columnsep}{1.5em}
 \setlength{\columnseprule}{0pt}
 
@@ -349,7 +355,7 @@
 \let\original@tableofcontents\tableofcontents
 \renewcommand{\tableofcontents}{%
     %
-    % Save settings.
+    % Save.
     %
     \setlength{\saved@textwidth}{\textwidth}
     \setlength{\saved@columnwidth}{\columnwidth}
@@ -359,25 +365,26 @@
     %
     % Set the TOC in one colum, with no page break, and as a section.
     %
+    \setlength{\leftskip}{0em}
     \setlength{\textwidth}{\linewidth}
     \let\clearpage\relax
     \@ifundefined{chapter}{}{\let\chapter\section}
     \original@tableofcontents
     %
-    % Restore settings.
+    % Restore.
     %
     \setlength{\textwidth}{\saved@textwidth}
     \setlength{\columnwidth}{\saved@columnwidth}
     \setlength{\linewidth}{\saved@linewidth}
+    \setlength{\hsize}{\linewidth}
     \let\clearpage\saved@clearpage
     \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
-    %
 }
 
 \let\original@listoftables\listoftables
-\renewcommand{\listoftables}{
+\renewcommand{\listoftables}{%
     %
-    % Save settings.
+    % Save.
     %
     \setlength{\saved@textwidth}{\textwidth}
     \setlength{\saved@columnwidth}{\columnwidth}
@@ -387,23 +394,26 @@
     %
     % Set the LOT in one colum, with no page break, and as a section.
     %
+    \setlength{\leftskip}{0em}
     \setlength{\textwidth}{\linewidth}
     \let\clearpage\relax
     \@ifundefined{chapter}{}{\let\chapter\section}
     \original@listoftables
     %
-    \let\clearpage\saved@clearpage
-    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    % Restore.
+    %
     \setlength{\textwidth}{\saved@textwidth}
     \setlength{\columnwidth}{\saved@columnwidth}
     \setlength{\linewidth}{\saved@linewidth}
-    %
+    \setlength{\hsize}{\linewidth}
+    \let\clearpage\saved@clearpage
+    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
 }
 
 \let\original@listoffigures\listoffigures
-\renewcommand{\listoffigures}{
+\renewcommand{\listoffigures}{%
     %
-    % Save settings.
+    % Save.
     %
     \setlength{\saved@textwidth}{\textwidth}
     \setlength{\saved@columnwidth}{\columnwidth}
@@ -418,12 +428,14 @@
     \@ifundefined{chapter}{}{\let\chapter\section}
     \original@listoffigures
     %
-    \let\clearpage\saved@clearpage
-    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
+    % Restore.
+    %
     \setlength{\textwidth}{\saved@textwidth}
     \setlength{\columnwidth}{\saved@columnwidth}
     \setlength{\linewidth}{\saved@linewidth}
-    %
+    \setlength{\hsize}{\linewidth}
+    \let\clearpage\saved@clearpage
+    \@ifundefined{chapter}{}{\let\chapter\saved@chapter}
 }
 
 \makeatother
@@ -536,6 +548,7 @@
 \newcommand{\TSOH}{\textit{The Speed of Heat}}
 \newcommand{\APJ}{\textit{Air Power Journal}}
 \newcommand{\MP}{Malcolm Pipes}
+\newcommand{\MPC}{Malcolm Pipes' compilation}
 \newcommand{\Harpoon}{\textit{Harpoon}}
 \newcommand{\HarpoonFour}{\textit{Harpoon\superscript{4}}}
 
