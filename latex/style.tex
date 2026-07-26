@@ -702,6 +702,8 @@
 
 % TABLE CAPTIONS
 
+\captionsetup[table]{name=TABLE}
+
 \newcommand{\tablecaption}[2]{%
     \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}}\rule{0em}{3.2ex}}
     \label{#1}
@@ -717,6 +719,18 @@
 }
 \newcommand{\longtablecaption}[1]{%
     \caption*{\bfseries\MakeUppercase{#1}\rule{0em}{3.2ex}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% FIGURE CAPTIONS
+
+\captionsetup[figure]{name=FIGURE}
+
+\newcommand{\figurecaption}[2]{%
+    \caption*{\hypertarget{#1}{\bfseries\MakeUppercase{#2}}\rule{0em}{3.2ex}}
+    \label{#1}
+    \addcontentsline{lof}{figure}{\MakeUppercase{#2}}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
