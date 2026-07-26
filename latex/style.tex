@@ -128,8 +128,10 @@
 \makeatother
 
 \newcommand{\maketitlepage}[4]{%
+    \newcommand{\documentauthor}{#2}
+    \newcommand{\documentdate}{#3}
     \twocolumn[
-        \title{Air Power\\[1ex] #1}
+        \title{{\LARGE AIR POWER}\\[1ex] \MakeUppercase{#1}}
         \author{#2}
         \date{#3\\[2\bigskipamount]#4}
         \maketitle
